@@ -1,0 +1,24 @@
+[
+  {
+"customerid": 123, 
+"customername": "parul",
+"phonenumber": 9,
+"job": "IT",
+"jobtype": "salaried",
+"address": " new delhi,india", 
+"city": "delhi",
+"state": "delhi",
+"salary": 50000
+},
+{
+"customerid": 124,
+"customername": "rose",
+"phonenumber": 9,
+"job": "HR",
+"jobtype": "salaried",
+"address": " mumbai,india",
+"city": "mumbai",
+"state": "mumbai",
+"salary": 50000
+}
+]
