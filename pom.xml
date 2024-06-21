@@ -23,6 +23,21 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
+				<configuration>
+    <armDeployment>
+      <muleVersion>${app.runtime}</muleVersion>
+      <uri>https://anypoint.mulesoft.com</uri>
+      <target>${target}</target>
+      <targetType>${target.type}</targetType>
+      <username>${username}</username>
+      <password>${password}</password>
+      <environment>${environment}</environment>
+      <key>${key}</key>
+      <properties>
+        <key>value</key>
+      </properties>
+    </armDeployment>
+  </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
