@@ -1,0 +1,37 @@
+#%RAML 1.0
+title: customer-sapi
+description: curd operation of banks
+mediaType: 
+- application/json
+protocols: [http,https]
+baseUri: http://hdfc.com/api/{version}
+version: v1
+
+types:
+  get-all-customer-response: !include datatypes/get-all-customer-response-dataType.raml
+  post-customer-request: !include datatypes/post-customer-request-dataType.raml
+  post-customer-response: !include datatypes/post-customer-response-dataType.raml
+/customer:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: get-all-customer-response
+            example:
+              !include examples/get-all-customer-examples-file.json
+  post:
+    body:
+      application/json:
+        type: post-customer-request
+        example: !include examples/post-customer-request-example.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: post-customer-response
+            example: !include examples/post-customer-response-file.json
+              
+              
+        
+    
