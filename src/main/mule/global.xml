@@ -6,9 +6,9 @@
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
 	<db:config name="Database_Config" doc:name="Database Config" doc:id="a03c43ee-6cdb-42c8-acca-073b81396c56" >
-		<db:oracle-connection host="${db.host}" user="${db.user}" password="${secure::db.password}" instance="${db.instance}"/>
+		<db:oracle-connection host="${db.host}" user="${db.user}" password="${db.password}" instance="${db.instance}"/>
 	</db:config>
 	<configuration-properties doc:name="Configuration properties" doc:id="bf28d5bd-50ab-4bae-b959-3c31f6d6f57e" file="conf\db.yaml" />
-	<configuration-properties doc:name="Configuration properties" doc:id="60149aea-db08-44a5-bc09-c59d52a3d26a" file="conf\secure-properties.yaml" />
-	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="777b1d6f-1207-4c10-84e0-6b5616bac155" file="conf\secure-properties.yaml" key="${key}" />
+	<!-- <configuration-properties doc:name="Configuration properties" doc:id="60149aea-db08-44a5-bc09-c59d52a3d26a" file="conf\secure-properties.yaml" /> -->
+	<!-- <secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="777b1d6f-1207-4c10-84e0-6b5616bac155" file="conf\secure-properties.yaml" key="${key}" /> -->
 </mule>

@@ -2,4 +2,5 @@ db:
   host: localhost
   user: system
   instance: xe
+  password: root
   

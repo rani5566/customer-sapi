@@ -32,7 +32,6 @@
       <username>${username}</username>
       <password>${password}</password>
       <environment>${environment}</environment>
-      <key>${key}</key>
       <properties>
         <key>value</key>
       </properties>
