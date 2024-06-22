@@ -29,7 +29,7 @@ output application/json
 			</ee:message>
 		</ee:transform>
 		<db:insert doc:name="Insert" doc:id="e3834a78-ed5e-4630-b715-7705dc433fc0" config-ref="Database_Config">
-			<db:sql ><![CDATA[insert into customer values{:custid,:custname,:phoneno,:job,:jobtype,:salary,:address,:city,:state}]]></db:sql>
+			<db:sql ><![CDATA[insert into customer values(:custid,:custname,:phoneno,:job,:jobtype,:salary,:address,:city,:state)]]></db:sql>
 			<db:input-parameters ><![CDATA[#[payload]]]></db:input-parameters>
 		</db:insert>
 		<ee:transform doc:name="Transform Message">
