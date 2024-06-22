@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<error-handler name="global-error-handlerError_Handler" doc:id="db91abe5-bcb9-4107-82f4-027973b01536" >
+            <on-error-propagate type="APIKIT:BAD_REQUEST">
+                <ee:transform doc:name="Transform Message">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Bad request"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">400</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="629a3799-b0d6-462b-9806-149a52e770e5" name="common-error-flow"/>
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <ee:transform doc:name="Transform Message">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Resource not found"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">404</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="69ce7213-78e7-4e46-815b-4cef98c84fcb" name="common-error-flow" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+                <ee:transform doc:name="Transform Message" doc:id="7115a4f1-dad3-4b16-b119-611c3be30bb3">
+                    <ee:message>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[405]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="6747b4e7-7322-4cb8-9a50-8451f28060de" name="common-error-flow" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+                <ee:transform doc:name="Transform Message" doc:id="e5f419b5-6f9e-487c-83d2-e9bbed56907b">
+                    <ee:message>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[406]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="08640e07-2c31-4159-aaaf-7486a73963c9" name="common-error-flow" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+                <ee:transform doc:name="Transform Message" doc:id="6914a04c-d9bc-4ee0-8de4-aa65cae4ac23">
+                    <ee:message>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[415]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="8e3bb156-9268-4d2a-813e-06d02e5bdc01" name="common-error-flow" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
+                <ee:transform doc:name="Transform Message" doc:id="6c741b09-6445-402e-b586-648264a0c3c5">
+                    <ee:message>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[501]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="53a0313c-4168-4db3-8ec4-13e2d71fc9ce" name="common-error-flow" />
+            
+</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f740d19f-9aae-4a04-b27b-afecf13f58b2" type="DB:CONNECTIVITY">
+			<ee:transform doc:name="Transform Message" doc:id="93803fa0-b7e0-4361-b6b6-aac47dde4d37" >
+				<ee:message />
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[503]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="c75ac2e4-b1ba-4ce9-ad48-e9ed0801e31c" name="common-error-flow" />
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="fa348518-3b95-460b-9931-302293cc2f37" type="ANY">
+			<ee:transform doc:name="Transform Message" doc:id="ac0662b1-938b-4933-9f8d-efe43ad88886" >
+				<ee:message />
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[500]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow Reference" doc:id="f42d4c15-daac-45b6-849b-b7b80c31c554" name="common-error-flow" />
+		</on-error-propagate>
+        
+</error-handler>
+	<sub-flow name="common-error-flow" doc:id="2070d085-1edb-4f1e-83e8-e2d3bbc11dfe" >
+		<ee:transform doc:name="Transform Message" doc:id="aae813ce-b049-4746-9ff5-6bde830e0fc4" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	api: app.name default null,
+	description: error.description,
+	timestamp: now()as String {format: "yyyy-MM-dd'T'HH:mm:ss"},
+	"type": "ERROR",
+	errorCode: (error.errorMessage.attributes.statusCode default vars.httpStatus) default 500
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

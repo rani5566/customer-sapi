@@ -1,0 +1,24 @@
+[
+    {
+        "ADDRESS": " mumbai,india",
+        "CITY": "mumbai",
+        "CUSTOMERID": 124,
+        "PHONENUMBER": 999999009,
+        "STATE": "mumbai",
+        "CUSTOMERNAME": "rose",
+        "JOB": "HR",
+        "SALARY": 50000,
+        "JOBTYPE": "salaried"
+    },
+    {
+        "ADDRESS": " mumbai,india",
+        "CITY": "mumbai",
+        "CUSTOMERID": 125,
+        "PHONENUMBER": 8765842099,
+        "STATE": "mumbai",
+        "CUSTOMERNAME": "raghav",
+        "JOB": "IT",
+        "SALARY": 70000,
+        "JOBTYPE": "salaried"
+    }
+]

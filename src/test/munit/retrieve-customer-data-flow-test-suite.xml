@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="retrieve-customer-data-flow-test-suite.xml" />
+	<munit:test name="retrieve-customer-data-flow-test-suite-get:\customer:customer-sapi-configTest" doc:id="6d9532cf-4d15-4fab-b8e2-5c27a4b2806d" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5bb138a1-9a97-419d-888e-5fddd1fecfce" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Retrieve all records" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="f2536132-82c5-4a24-a524-b76b8fe41e12" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[%dw 2.0&#10;output application/json&#10;---&#10;readUrl(&quot;classpath://samples/get-record-response.json&quot;,'application/json')]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\customer:customer-sapi-config" doc:id="a15ea575-4456-4425-8685-d47ffee1a4ce" name="get:\customer:customer-sapi-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="681ea9ef-9198-45b5-befc-77440bf41e23" expression="#[payload]" is="#[MunitTools::withMediaType('application/json')]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
